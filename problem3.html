@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Problem 3</title>
+        <link rel="stylesheet" href="problem3style.css">
+        <script>
+        //      function ShowData() {
+        //     var val = document.getElementById('p1').innerText;
+        //     document.getElementById('p2').innerHTML = parseInt(val);
+        //     document.getElementById('p6').innerHTML = val | 0;
+        // }
+            var listOfProduct = [
+            {productName:'The Alchemist',
+             productImage:'\Lab6_img\\thealchemist.jpg',
+             productPrice:182.700
+            },
+            {
+                productName: 'Learning How to Learn',
+                productImage:'\Lab6_img\\learninghowtolearn.jpg',
+                productPrice:251.100
+            },
+            {
+                productName: 'Thinking,Fast and Slow',
+                productImage:'\Lab6_img\\thinkingfastandslow.png',
+                productPrice:299.700
+            }
+            ];
+            function compare(a,b){
+                let x = parseFloat(a.productPrice);
+                let y = parseFloat(b.productPrice);
+             if(y > x) return -1;
+             if(y < x) return 1;
+             return 0;
+            }
+            function showProduct(){
+                listOfProduct.sort(compare);
+                
+                var str = '';
+                document.writeln("<div id='result'>    </div>");
+                document.getElementById("result").innerHTML += "<table style='margin:0;padding:0' width='100%' cellspacing='0'><tr id='singlerow'> </tr></table>";
+                for(i= 0; i < listOfProduct.length;i++){
+                    str +=` <td  width="33.33%" style="text-align:center;padding:20px;border:1px solid black"> <div style="font-weight:bolder;font-size:larger;">${listOfProduct[i].productName}</div> <img  id="picture" src=
+                    '${listOfProduct[i].productImage}' width="100%"  height="600px;" /> <div style="color:red;font-weight:bolder;font-size:larger">${listOfProduct[i].productPrice} VND</div> </td>`;
+                };
+                document.getElementById("singlerow").innerHTML = str;
+            }
+            
+        </script>
+       
+    </head>
+   
+    <body onload="showProduct()">
+        
+        
+        
+   
+    </body>
+</html>

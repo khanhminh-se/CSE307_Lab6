@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Problem 7</title>
+        <script>
+           
+            function findMin(list){
+                var min=list[0];
+                for(var i=0; i < list.length;i++){
+                    if(list[i] < min){
+                        min = list[i];
+                    }
+                }
+                return min;
+            } 
+            function findMax(list){
+                var max=list[0];
+                for(var i=0; i < list.length;i++){
+                    if(max < list[i]){
+                        max = list[i];
+                    }
+                }
+                return max;
+            }
+            function computeSum(list){
+                var sum=0;
+                for(var i=0; i < list.length;i++){
+                    sum += Number(list[i]);
+                }
+                return sum;
+            }
+            function myFunction(){
+            var input = document.getElementById("inputTextField").value;
+            var numberList = input.split(",");
+                var min = parseFloat(findMin(numberList)).toFixed(2);
+                var max = parseFloat(findMax(numberList)).toFixed(2);
+                var sum= parseFloat(computeSum(numberList)).toFixed(2);
+                var avg = parseFloat(sum / numberList.length).toFixed(2);
+                document.getElementById("min").innerHTML= "Min = " + String(min);
+                document.getElementById("max").innerHTML="Max = " + String(max);
+                document.getElementById("sum").innerHTML ="Sum = " + String(sum);
+                document.getElementById("avg").innerHTML = "Average = " + String(avg);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>MMSA Of N Numbers</h1>
+        <label for="inputTextField">Enter numbers separately by commas</label>
+        <input type="text" id="inputTextField" required>
+        <span><button type="submit" onclick="myFunction()" id="printbutton">Calculate MMSA</button></span>
+        <div style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <p id="min"></p>
+            <p id="max"></p>
+            <p id="sum"></p>
+            <p id="avg"></p>
+             </div>
+    </body>
+</html>

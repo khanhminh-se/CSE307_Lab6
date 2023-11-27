@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Problem 6</title>
+    <script>
+        function isPrime() {
+            var value = parseInt(document.getElementById("inputTextField").value);
+            var flag = true;
+            if (value < 2) {
+                return false;
+            } else {
+                for (var i = 2; i <= Math.sqrt(value); i++) {
+                    if (value % i == 0) {
+                        return false;
+                    }
+                }
+                return flag;
+            }
+        }
+        function execute(){
+            if(isPrime()){
+                document.getElementById("result").innerHTML="True";
+            }else{
+                document.getElementById("result").innerHTML="False";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Prime Check</h1>
+    <label for="inputTextField">Enter a positive number N</label>
+    <input type="text" id="inputTextField" required>
+    <span><button type="submit" onclick="execute()" id="printbutton">Check Prime</button></span>
+    <p id="result">Please enter a valid positive integer !</p>
+</body>
+
+</html>

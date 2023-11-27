@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Problem 5</title>
+        <script>
+       
+    
+            function printNumber(){
+                var str = "";
+                var n = Number(document.getElementById("inputTextField").value);
+                for(var i = 1; i <= n;i++){
+                    str += i + "\t";
+                }
+                document.getElementById("result").innerText=str;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Numbers from 1 to N</h1>
+        <label for="inputTextField">Enter a positive number N</label>
+        <input type="text" id="inputTextField" required>
+        <span><button type="submit" onclick="printNumber()" id="printbutton">Print Numbers</button></span>
+        <p id="result">Please enter a valid positive integer !</p>
+    </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem 4</title>
+    <script>
+        var productList = [
+            {
+                productID: 1,
+                productName: 'Laptop',
+                quantity: 5,
+                productPrice: 1200,
+                productImage: '\https://bizweb.dktcdn.net/thumb/1024x1024/100/386/618/products/3502-1.jpg?v=1626777769890'
+            },
+            {
+                productID: 2,
+                productName: 'Phone',
+                quantity: 10,
+                productPrice: 800,
+                productImage: 'https://cdn.tgdd.vn/Files/2023/09/13/1547044/8-290923-150046.jpg'
+            },
+            {
+                productID: 3,
+                productName: 'Tablet',
+                quantity: 8,
+                productPrice: 500,
+                productImage: 'https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-tab-s6-lite-1.jpg'
+            }
+        ];
+        function compare(a, b) {
+            let x = a.productName;
+            let y = b.productName;
+            if (y > x) {
+                return -1;
+            } else if (y < x) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        function showProduct() {
+            productList.sort(compare);
+            var str = "";
+            for (var i = 0; i < productList.length; i++) {
+                str += ` <td style="text-align:center;" width="auto";> <div style="font-size:larger;font-weight:bold">${productList[i].productName}</div> <img style="display:flex; padding-left:100px;"  width="350px" height="350px;" src='${productList[i].productImage}' />
+                        <p>Product ID :${productList[i].productID} </p>
+                        <p>Quantity: ${productList[i].quantity}</p>
+                        <p>Product Price :${productList[i].productPrice} VND</p> </td>`;
+
+            }
+            document.getElementById("row").innerHTML = str;
+        }
+        function addHead() {
+
+            productList.splice(0, 0, getProduct());
+            this.showProduct();
+
+        }
+        function addTail() {
+            var product1 = getProduct();
+            productList.push(product1);
+            this.showProduct();
+        }
+        function getProduct() {
+            name = String(document.getElementById("productName").value);
+            id = String(document.getElementById("productID").value);
+            quan = Number(document.getElementById("quantity").value);
+            image = String(document.getElementById("image").value);
+            price = Number(document.getElementById("price").value);
+            return { productID: id, productName: name, quantity: quan, productPrice: price, productImage: image };
+        }
+        function clearData() {
+            document.getElementById("productID").value = "";
+            document.getElementById("productName").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("image").value = "";
+            document.getElementById("quantity").value = "";
+            document.getElementById("newName").value="";
+            document.getElementById("newQuatity").value="";
+            document.getElementById("newImage").value="";
+            document.getElementById("newPrice").value="";
+            document.getElementById("searchresult").innerHTML="";
+        }
+        function searchProductByName(){
+            name = String(document.getElementById("searchtextfield").value);
+            for(var i=0; i < productList.length;i++){
+                if(productList[i].productName ==name){
+                    return   {
+                        productID: productList[i].productID, productName: productList[i].productName, quantity: productList[i].quantity
+                        , productPrice: productList[i].productPrice, productImage: productList[i].productImage
+                    };
+                }
+            }
+        }
+        function displayProduct() {
+            result = searchProductByName();
+            str = `<div style="font-size:larger;font-weight:bold">${result.productName}</div> <img style="display:flex; padding-left:100px;"  width="350px" height="350px;" src='${result.productImage}' />
+                        <p>Product ID :${result.productID} </p>
+                        <p>Quantity: ${result.quantity}</p>
+                        <p>Product Price :${result.productPrice} VND</p>`;
+            document.getElementById("searchresult").innerHTML = str;
+        }
+        function removeProduct() {
+            id = ID = String(document.getElementById("productidfield").value);
+            var i = 0;
+            for (i; i < productList.length; i++) {
+                if (productList[i].productID == ID) {
+                    break;
+                }
+            }
+            this.productList.splice(i, 1);
+            
+            this.showProduct();
+            clearData();
+        }
+        function editProduct(){
+            var id = String(document.getElementById("productidfield").value);
+            var name = String(document.getElementById("newName").value);
+            var quantity  =String(document.getElementById("newQuantity").value);
+            var image= String(document.getElementById("newImage").value);
+            var price = String(document.getElementById("newPrice").value);
+            var i =0;
+            while(i < productList.length){
+                if(productList[i].productID == id){
+                    break;
+                }
+                i++;
+            }
+           if(name != ""){
+                productList[i].productName = name;
+           }
+           if(quantity != ""){
+            productList[i].quantity = Number(quantity);
+           }
+           if(image !="") {
+            productList[i].productImage = image;
+           }
+           if(price != ""){
+            productList[i].productPrice= Number(price);
+           }
+           showProduct();
+        }
+    </script>
+</head>
+
+<body onload="showProduct()">
+    <div>
+        <table width="100%" border="1" cellspacing="0" cellpadding="0">
+            <tr id="row"> </tr>
+        </table>
+    </div>
+    <div id="div2" style="margin-left:5%;margin-top:50px;">
+        <form>
+            <table cellpadding="5">
+                <tr>
+                    <th>Update new products :</th>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="productID">Product ID:</label>
+                    </td>
+                    <td><span><input type="text" id="productID" required></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="productName">Product Name:</label>
+
+                    </td>
+                    <td> <span><input type="text" id="productName" required></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="quantity">Quantity:</label>
+                    </td>
+                    <td><input type="number" id="quantity" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="price">Product Price:</label>
+                    </td>
+                    <td>
+                        <input type="number" id="price" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="image">Image Link:</label></td>
+                    <td><input type="text" accept="image/*" id="image" required></td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="addHead()">Add Head</button></td>
+                    <td><span><button onclick="addTail()" type="submit">Add Tail</button></span></td>
+                </tr>
+        
+
+
+            </table>
+            <table  cellpadding="5">
+                <tr>
+                    <th>Search Product By ID:</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="searchtextfield" placeholder="Enter the product name"></td>
+                    <td><button type="button" onclick="displayProduct()">Search</button></td>
+                    <td style="text-align:center;" width="auto" ; id="searchresult"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><input type="text" id="productidfield" placeholder="Enter the product ID" style="height: 40px;;" required ></td>
+                    <td><button type="button" onclick="removeProduct()">Remove</button></td>
+                    
+                </tr>
+                <tr>
+                    <td><button type="button" style="width: 65px;height: auto;" onclick="editProduct()">Edit</button></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="text" id="newName" placeholder="Enter the new name"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="number" id="newQuantity" placeholder="Enter the new entity">
+                    </td>
+                </tr>
+                <tr><td>
+                    <input type="text" id="newImage" placeholder="Enter the new image link">
+                </td></tr>
+                <tr>
+                    <td><input type="number" id="newPrice" placeholder="Enter the new price"></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</body>
+
+</html>
